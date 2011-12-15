@@ -1,0 +1,13 @@
+{application, cm,
+ [{description, ""}
+  ,{vsn, "1"}
+  ,{registered, []}
+  ,{applications,
+    [kernel
+     ,stdlib
+    ]}
+  ,{mod, { cm_app, []}}
+  ,{env,
+    [
+    ]}
+ ]}.
