@@ -5,6 +5,7 @@
   ,{applications,
     [kernel
      ,stdlib
+     ,cowboy
     ]}
   ,{mod, { cm_app, []}}
   ,{env,
