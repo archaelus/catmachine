@@ -5,7 +5,7 @@
 -define(APP, cm).
 
 %% Application callbacks
--export([start/2, stop/1]).
+-export([start_phase/3, start/2, stop/1]).
 
 -export([config/0, config/1, config/2,
          start/0, a_start/2]).
@@ -41,6 +41,18 @@ start(_StartType, _StartArgs) ->
     cm_sup:start_link().
 
 stop(_State) ->
+    ok.
+
+start_phase(listen, _Type, _Args) ->
+    Dispatch = [
+                {'_', [
+                       {'_', cm_http_handler, []}
+                      ]}
+               ],
+    cowboy:start_listener(http, 100,
+                          cowboy_tcp_transport, [{port, config(http_listen_port)}],
+                          cowboy_http_protocol, [{dispatch, Dispatch}]
+                         ),
     ok.
 
 %%%===================================================================
